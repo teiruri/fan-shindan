@@ -9,7 +9,7 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Yu Gothic","Meiryo",-apple-system,sans-serif;font-size:14px;line-height:1.6}
 .wrap{max-width:980px;margin:0 auto;padding:0 16px 60px}
-.topbar{background:var(--dark);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;top:0;z-index:5}
+.topbar{background:linear-gradient(100deg,#0A2A3A,#114a63);color:#fff;padding:13px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;top:0;z-index:5;border-bottom:3px solid var(--cyan)}
 .topbar .logo{font-size:18px;font-weight:bold}
 .topbar .logo b{color:var(--cyan)}
 .topbar .sp{flex:1}
@@ -19,19 +19,22 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:"Yu Gothic","Mei
 .btn.pri:hover{background:#1cbcff}
 select,input[type=text],input[type=number],textarea{font-family:inherit;border:1px solid var(--line);border-radius:8px;padding:7px 9px;font-size:14px;background:#fff;color:var(--ink)}
 input[type=number]{text-align:center}
-.sec{margin:22px 0 8px;font-size:12px;color:var(--muted);letter-spacing:.04em;font-weight:bold}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.sec{margin:24px 0 9px;font-size:14px;color:var(--ink);font-weight:bold;padding-left:11px;position:relative}
+.sec::before{content:"";position:absolute;left:0;top:3px;bottom:3px;width:4px;border-radius:2px;background:linear-gradient(180deg,var(--cyan),#16A884)}
+.card{background:var(--card);border:1px solid #dbe3e8;border-radius:12px;padding:15px 17px;margin-bottom:10px;box-shadow:0 2px 7px rgba(10,42,58,.06)}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.chip{font-size:12.5px;padding:6px 11px;border:1px solid var(--line);border-radius:999px;cursor:pointer;color:var(--body);background:#fff;user-select:none;display:inline-flex;align-items:center;gap:5px}
-.chip.on{border-color:var(--cyan);background:var(--cyanL);color:var(--cyanD);font-weight:bold}
+.chip{font-size:12.5px;padding:6px 12px;border:1px solid #cdd8df;border-radius:999px;cursor:pointer;color:var(--body);background:#fff;user-select:none;display:inline-flex;align-items:center;gap:5px;transition:.12s}
+.chip:hover{border-color:var(--cyan)}
+.chip.on{border-color:var(--cyan);background:var(--cyan);color:#fff;font-weight:bold;box-shadow:0 2px 6px rgba(0,176,240,.35)}
+.chip.on::before{content:"✓";font-size:11px;font-weight:bold}
 .chip.lock{opacity:.6;cursor:default}
 .num{width:64px;height:34px}
 .bn{width:52px;height:30px}
-.badge{width:24px;height:24px;border-radius:50%;background:var(--cyanL);color:var(--cyanD);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;flex:none}
+.badge{width:26px;height:26px;border-radius:50%;background:var(--cyan);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:bold;flex:none;box-shadow:0 1px 3px rgba(0,176,240,.4)}
 .lead{font-size:18px;font-weight:bold;text-align:center;margin:6px 0}
 .gate{font-size:11px;font-weight:bold;text-align:center;min-width:54px}
 .muted{color:var(--muted);font-size:12px}
-.hl{background:var(--cyanL);border:1px solid #bfe6f8;border-radius:12px;padding:12px 16px;margin-bottom:10px}
+.hl{background:linear-gradient(180deg,#eef9fe,#E2F4FD);border:1px solid #bfe6f8;border-left:5px solid var(--cyan);border-radius:10px;padding:12px 16px 12px 15px;margin-bottom:10px}
 .warnbox{border:1px solid #f0c98a;border-radius:12px;padding:12px 14px}
 .badbox{border:1px solid #f0a79f;border-radius:12px;padding:12px 14px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -39,11 +42,11 @@ input[type=number]{text-align:center}
 .col5{display:flex;margin-top:6px}
 .col5>div{flex:1;text-align:center;padding:0 2px}
 table.bm{border-collapse:collapse}
-.flow{display:flex;gap:6px;align-items:stretch;flex-wrap:wrap}
-.pcard{flex:1 1 150px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
-.pn{display:inline-flex;width:22px;height:22px;border-radius:50%;background:var(--cyan);color:#04222e;font-weight:bold;align-items:center;justify-content:center;font-size:12px;margin-bottom:6px}
-.pcard b{font-size:13px}
-.parrow{display:flex;align-items:center;color:var(--cyan);font-size:20px;font-weight:bold}
+.flow{display:flex;gap:7px;align-items:stretch;flex-wrap:wrap}
+.pcard{flex:1 1 165px;background:#fff;border:1px solid #dbe3e8;border-top:4px solid var(--pc,#00B0F0);border-radius:10px;padding:12px 13px 13px;min-height:134px;box-shadow:0 2px 7px rgba(10,42,58,.06)}
+.pn{display:flex;width:27px;height:27px;border-radius:50%;background:var(--pc,#00B0F0);color:#fff;font-weight:bold;align-items:center;justify-content:center;font-size:14px;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.pcard b{font-size:13px;line-height:1.42;color:var(--ink);display:block;margin-bottom:5px}
+.parrow{display:flex;align-items:center;color:#c1ccd3;font-size:18px;font-weight:bold}
 @media(max-width:680px){.grid2{grid-template-columns:1fr}.parrow{transform:rotate(90deg);justify-content:center;width:100%}}
 @media print{.no-print{display:none!important}.topbar{position:static}body{background:#fff}.card{break-inside:avoid}}
 </style>
@@ -63,15 +66,15 @@ table.bm{border-collapse:collapse}
   <div class="sec">ご利用の流れ（アポ取得 → 結果アウトプット）</div>
   <div class="card">
     <div class="flow">
-      <div class="pcard"><div class="pn">1</div><b>アポ取得（テレアポ）</b><div class="muted">「WEB情報から無料診断します」をフックに初回アポ獲得</div></div>
+      <div class="pcard" style="--pc:#2E8BC0"><div class="pn">1</div><b>アポ取得（テレアポ）</b><div class="muted">「WEB情報から無料診断します」をフックに初回アポ獲得</div></div>
       <div class="parrow">›</div>
-      <div class="pcard"><div class="pn">2</div><b>アポ前｜WEB一次分析〈AI〉</b><div class="muted">URL→AIが採用サイト/口コミ/求人を分析→一次診断(仮)＋トーク草案</div></div>
+      <div class="pcard" style="--pc:#00B0F0"><div class="pn">2</div><b>アポ前｜WEB一次分析〈AI〉</b><div class="muted">URL→AIが採用サイト/口コミ/求人を分析→一次診断(仮)＋トーク草案</div></div>
       <div class="parrow">›</div>
-      <div class="pcard"><div class="pn">3</div><b>初回アポ｜ヒアリング〈画面共有〉</b><div class="muted">ファネル人数・取り組み・所感を一緒に入力→診断を確定</div></div>
+      <div class="pcard" style="--pc:#16A884"><div class="pn">3</div><b>初回アポ｜ヒアリング〈画面共有〉</b><div class="muted">ファネル人数・取り組み・所感を一緒に入力→診断を確定</div></div>
       <div class="parrow">›</div>
-      <div class="pcard"><div class="pn">4</div><b>診断結果</b><div class="muted">到達度カーブ・2つの取りこぼし・ボトルネック・期待効果</div></div>
+      <div class="pcard" style="--pc:#5BB04A"><div class="pn">4</div><b>診断結果</b><div class="muted">到達度カーブ・2つの取りこぼし・ボトルネック・期待効果</div></div>
       <div class="parrow">›</div>
-      <div class="pcard"><div class="pn">5</div><b>アウトプット＆提案</b><div class="muted">PDFを置き土産→打ち手DBから提案（TRACE/クロージング/伴走/TRAY）</div></div>
+      <div class="pcard" style="--pc:#F2933C"><div class="pn">5</div><b>アウトプット＆提案</b><div class="muted">PDFを置き土産→打ち手DBから提案（TRACE/クロージング/伴走/TRAY）</div></div>
     </div>
     <div class="muted" style="margin-top:10px;text-align:center">最重視：候補者を“承諾者”に引き上げる<b style="color:var(--cyanD)">「気づき」</b>　／　無料で双方<b style="color:var(--cyanD)">“軽い”</b>運用（事前にAIで7〜8割、当日は数値の穴埋めだけ）</div>
   </div>
@@ -130,8 +133,8 @@ table.bm{border-collapse:collapse}
 
   <div class="sec" style="margin-top:24px;font-size:15px;color:var(--ink)">― 診断結果 ―</div>
   <div class="card row" style="align-items:stretch">
-    <div style="text-align:center;min-width:120px">
-      <div class="muted">総合スコア</div><div id="ov" style="font-size:34px;font-weight:bold">–</div><div id="ovlv" style="font-weight:bold"></div>
+    <div style="text-align:center;min-width:132px;background:linear-gradient(180deg,#eef9fe,#dff1fb);border:1px solid #bfe6f8;border-radius:10px;padding:10px 8px;display:flex;flex-direction:column;justify-content:center">
+      <div class="muted" style="font-weight:bold">総合スコア</div><div id="ov" style="font-size:38px;font-weight:bold;line-height:1.1;color:var(--dark)">–</div><div id="ovlv" style="font-weight:bold"></div>
     </div>
     <div id="summary" class="hl" style="flex:1;margin:0;display:flex;align-items:center"></div>
   </div>

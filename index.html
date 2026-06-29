@@ -80,9 +80,15 @@ table.bm{border-collapse:collapse}
   </div>
 
   <div class="sec">対象企業</div>
-  <div class="card row">
-    <span class="muted">会社名</span><input type="text" id="company" placeholder="株式会社〇〇" style="width:220px">
-    <span class="muted">採用サイト等URL</span><input type="text" id="url" placeholder="https://…" style="flex:1;min-width:180px">
+  <div class="card">
+    <div class="row" style="margin-bottom:10px">
+      <span class="muted">会社名</span><input type="text" id="company" placeholder="株式会社〇〇" style="width:240px">
+    </div>
+    <div class="row" style="justify-content:space-between;align-items:center;margin-bottom:7px">
+      <span class="muted">関連URL（採用サイト・求人原稿・口コミ など複数可）</span>
+      <button class="btn" type="button" onclick="addUrl()">＋ URLを追加</button>
+    </div>
+    <div id="urls"></div>
   </div>
 
   <div class="sec no-print">アポ前 WEB一次分析（AIで“気づき”を引き出す）</div>
@@ -297,23 +303,36 @@ function recompute(){
  ins.innerHTML='<b style="color:var(--cyanD)">気づき</b><ul style="margin:6px 0 0;padding-left:20px">'+lines.map(function(l){return '<li>'+l+'</li>';}).join("")+'</ul>';
 }
 
+var URLTYPES=["採用サイト","求人原稿","コーポレートサイト","口コミ","SNS","その他"];
+function urlRow(type,val){
+ var w=document.getElementById("urls");
+ var row=document.createElement("div");row.className="row urlrow";row.style.marginBottom="6px";
+ var sel=document.createElement("select");URLTYPES.forEach(function(t){var o=document.createElement("option");o.value=t;o.textContent=t;if(t===type)o.selected=true;sel.appendChild(o);});sel.style.width="150px";sel.style.flex="none";
+ var inp=document.createElement("input");inp.type="text";inp.placeholder="https://…";inp.value=val||"";inp.style.flex="1";inp.style.minWidth="180px";
+ var del=document.createElement("button");del.className="btn";del.type="button";del.textContent="✕";del.title="削除";del.style.flex="none";del.onclick=function(){row.remove();};
+ row.appendChild(sel);row.appendChild(inp);row.appendChild(del);w.appendChild(row);
+}
+function addUrl(type,val){urlRow(type||"その他",val||"");}
+function getUrls(){return [].slice.call(document.querySelectorAll("#urls .urlrow")).map(function(r){return {type:r.querySelector("select").value,url:r.querySelector("input").value.trim()};}).filter(function(u){return u.url;});}
+function seedUrls(list){var w=document.getElementById("urls");w.innerHTML="";if(list&&list.length){list.forEach(function(u){urlRow(u.type,u.url);});}else{urlRow("採用サイト","");urlRow("求人原稿","");}}
 function copyPrompt(){
- var c=document.getElementById("company").value||"（企業名）",u=document.getElementById("url").value||"（URL）";
- var p="以下の企業のキャリア（中途）採用を、WEB上の公開情報から分析してください。\n企業名: "+c+"\nURL: "+u+"\n\n各ステップごとに【所見】【気づき】【初回アポで確認したい数値】を簡潔に。\n①知る（発見性）: 採用サイト/媒体/Indeed/SNSの露出\n②惹かれる（魅力）: 採用サイトの充実度・更新・スマホ対応／求人の魅力・条件・ターゲット適合（競合比較で選ばれるか）\n③信頼する（選考体験）: 口コミ評価\n④決断・⑤活躍: WEBでは不可のため『当日ヒアリング』と記載\n\n最後に『最も伸びしろがありそうなステップ』と『初回アポでのトークの切り口』を1〜2行で。";
+ var c=document.getElementById("company").value||"（企業名）";
+ var us=getUrls(),u=us.length?us.map(function(x){return "・"+x.type+"："+x.url;}).join("\n"):"（URL未入力）";
+ var p="以下の企業のキャリア（中途）採用を、WEB上の公開情報から分析してください。\n企業名: "+c+"\n対象URL（種別つき）:\n"+u+"\n\n各ステップごとに【所見】【気づき】【初回アポで確認したい数値】を簡潔に。\n①知る（発見性）: 採用サイト/媒体/Indeed/SNSの露出\n②惹かれる（魅力）: 採用サイトの充実度・更新・スマホ対応／求人の魅力・条件・ターゲット適合（競合比較で選ばれるか）\n③信頼する（選考体験）: 口コミ評価\n④決断・⑤活躍: WEBでは不可のため『当日ヒアリング』と記載\n\n最後に『最も伸びしろがありそうなステップ』と『初回アポでのトークの切り口』を1〜2行で。";
  navigator.clipboard.writeText(p).then(function(){var e=document.getElementById("copied");e.style.display="inline";setTimeout(function(){e.style.display="none";},1800);});
 }
 function onAi(){var v=document.getElementById("aiNote").value,s=document.getElementById("aiShow");if(v.trim()){s.style.display="block";s.textContent=v;}else s.style.display="none";}
 
 /* 保存・読込（localStorage） */
-function state(){return{company:document.getElementById("company").value,url:document.getElementById("url").value,aiNote:document.getElementById("aiNote").value,cfg:cfg,vals:vals,bm:bm,preset:ps.value,actions:steps.map(function(s,si){return [].slice.call(sh.querySelectorAll('.chip[data-step="'+si+'"]')).map(function(c){return c.classList.contains("on")?1:0;});})};}
+function state(){return{company:document.getElementById("company").value,urls:getUrls(),aiNote:document.getElementById("aiNote").value,cfg:cfg,vals:vals,bm:bm,preset:ps.value,actions:steps.map(function(s,si){return [].slice.call(sh.querySelectorAll('.chip[data-step="'+si+'"]')).map(function(c){return c.classList.contains("on")?1:0;});})};}
 function store(){try{return JSON.parse(localStorage.getItem("fanshindan")||"{}");}catch(e){return{};}}
 function saveCase(){var c=document.getElementById("company").value.trim();if(!c){alert("会社名を入力してください");return;}var all=store();all[c]=state();localStorage.setItem("fanshindan",JSON.stringify(all));refreshList();alert("「"+c+"」を保存しました");}
 function refreshList(){var sel=document.getElementById("loadSel"),all=store();sel.innerHTML='<option value="">保存した診断を開く…</option>';Object.keys(all).forEach(function(k){var o=document.createElement("option");o.value=k;o.textContent=k;sel.appendChild(o);});}
-document.getElementById("loadSel").onchange=function(){var k=this.value;if(!k)return;var st=store()[k];if(!st)return;document.getElementById("company").value=st.company||"";document.getElementById("url").value=st.url||"";document.getElementById("aiNote").value=st.aiNote||"";cfg=Object.assign({doc:true,casual:false,i1:true,i2:false,final:true},st.cfg);vals=Object.assign({},st.vals);bm=Object.assign({},st.bm);["doc","casual","i2","final"].forEach(function(kk){var c=document.querySelector('#cfg .chip[data-k="'+kk+'"]');if(c)c.classList.toggle("on",!!cfg[kk]);});if(st.preset){ps.value=st.preset;}fillBM();renderFunnel();if(st.actions)steps.forEach(function(s,si){var ch=sh.querySelectorAll('.chip[data-step="'+si+'"]');st.actions[si]&&st.actions[si].forEach(function(on,ti){if(ch[ti])ch[ti].classList.toggle("on",!!on);});});onAi();recompute();};
+document.getElementById("loadSel").onchange=function(){var k=this.value;if(!k)return;var st=store()[k];if(!st)return;document.getElementById("company").value=st.company||"";seedUrls(st.urls||(st.url?[{type:"採用サイト",url:st.url}]:null));document.getElementById("aiNote").value=st.aiNote||"";cfg=Object.assign({doc:true,casual:false,i1:true,i2:false,final:true},st.cfg);vals=Object.assign({},st.vals);bm=Object.assign({},st.bm);["doc","casual","i2","final"].forEach(function(kk){var c=document.querySelector('#cfg .chip[data-k="'+kk+'"]');if(c)c.classList.toggle("on",!!cfg[kk]);});if(st.preset){ps.value=st.preset;}fillBM();renderFunnel();if(st.actions)steps.forEach(function(s,si){var ch=sh.querySelectorAll('.chip[data-step="'+si+'"]');st.actions[si]&&st.actions[si].forEach(function(on,ti){if(ch[ti])ch[ti].classList.toggle("on",!!on);});});onAi();recompute();};
 function newCase(){if(!confirm("新規診断を開始しますか？（未保存の入力は消えます）"))return;location.reload();}
 
 ["doc","casual","i2","final"].forEach(function(k){var c=document.querySelector('#cfg .chip[data-k="'+k+'"]');if(cfg[k])c.classList.add("on");});
-fillBM();renderFunnel();refreshList();recompute();
+seedUrls();fillBM();renderFunnel();refreshList();recompute();
 </script>
 </body>
 </html>

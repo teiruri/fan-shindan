@@ -47,6 +47,30 @@ table.bm{border-collapse:collapse}
 .pn{display:flex;width:27px;height:27px;border-radius:50%;background:var(--pc,#00B0F0);color:#fff;font-weight:bold;align-items:center;justify-content:center;font-size:14px;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,.18)}
 .pcard b{font-size:13px;line-height:1.42;color:var(--ink);display:block;margin-bottom:5px}
 .parrow{display:flex;align-items:center;color:#c1ccd3;font-size:18px;font-weight:bold}
+/* === 視認性 & アポ商談モード === */
+.num{width:72px;height:40px;font-size:18px;font-weight:bold}
+.bn{width:58px;height:32px;font-size:15px}
+#funnel>div>div{font-size:13px!important}
+.modebtn{background:#0d3346;color:#cfe9f6;border-color:#2b4a5c}
+.modebtn.act{background:var(--cyan);color:#04222e;font-weight:bold;border-color:var(--cyan)}
+.meet-only{display:none}
+.hpcard{background:#fff;border:1px solid #dbe3e8;border-left:5px solid var(--pc,#00B0F0);border-radius:10px;padding:10px 14px;margin-bottom:8px}
+.hpcard b{font-size:15px;color:var(--ink)}
+.hpcard li{margin:4px 0}
+body.mode-meet{font-size:16px}
+body.mode-meet .wrap{max-width:1060px}
+body.mode-meet .prep-only{display:none!important}
+body.mode-meet .meet-only{display:block}
+body.mode-meet .sec{font-size:18px}
+body.mode-meet .muted{font-size:14px}
+body.mode-meet .num{width:100px;height:56px;font-size:28px}
+body.mode-meet .bn{width:70px;height:40px;font-size:18px}
+body.mode-meet #funnel>div>div{font-size:15px!important}
+body.mode-meet .chip{font-size:15px;padding:9px 15px}
+body.mode-meet .badge{width:30px;height:30px;font-size:15px}
+body.mode-meet #ov{font-size:50px!important}
+body.mode-meet .hpcard b{font-size:17px}
+body.mode-meet .hpcard li{font-size:15px}
 @media(max-width:680px){.grid2{grid-template-columns:1fr}.parrow{transform:rotate(90deg);justify-content:center;width:100%}}
 @media print{.no-print{display:none!important}.topbar{position:static}body{background:#fff}.card{break-inside:avoid}}
 </style>
@@ -54,6 +78,8 @@ table.bm{border-collapse:collapse}
 <body>
 <div class="topbar no-print">
   <div class="logo"><b>FAN</b> 採用診断 <span style="font-size:12px;opacity:.7">by KAKEHASHISKY</span></div>
+  <button class="btn modebtn act" id="mPrep" type="button" onclick="setMode('prep')">📋 準備</button>
+  <button class="btn modebtn" id="mMeet" type="button" onclick="setMode('meet')">🤝 アポ商談</button>
   <div class="sp"></div>
   <select id="loadSel" style="background:#13384a;color:#fff;border-color:#2b4a5c"><option value="">保存した診断を開く…</option></select>
   <button class="btn" onclick="newCase()">新規</button>
@@ -63,8 +89,8 @@ table.bm{border-collapse:collapse}
 
 <div class="wrap">
 
-  <div class="sec">ご利用の流れ（アポ取得 → 結果アウトプット）</div>
-  <div class="card">
+  <div class="sec prep-only">ご利用の流れ（アポ取得 → 結果アウトプット）</div>
+  <div class="card prep-only">
     <div class="flow">
       <div class="pcard" style="--pc:#2E8BC0"><div class="pn">1</div><b>アポ取得（テレアポ）</b><div class="muted">「WEB情報から無料診断します」をフックに初回アポ獲得</div></div>
       <div class="parrow">›</div>
@@ -91,8 +117,17 @@ table.bm{border-collapse:collapse}
     <div id="urls"></div>
   </div>
 
-  <div class="sec no-print">アポ前 WEB一次分析（AIで“気づき”を引き出す）</div>
-  <div class="card no-print">
+  <div class="sec meet-only">アポ用｜WEB一次分析（事前分析の経過）</div>
+  <div class="card meet-only">
+    <div style="font-size:23px;font-weight:bold;color:var(--dark)" id="meetCompany">（会社名）</div>
+    <div class="muted" style="margin-bottom:10px">WEB上の公開情報をもとに、現状を一緒に確認していきます。</div>
+    <div id="meetAi" class="hl" style="white-space:pre-wrap;font-size:15px;line-height:1.7">（準備モードでAI分析結果を貼り付けると、ここに表示されます）</div>
+  </div>
+  <div class="sec meet-only">ヒアリングポイント（FANサイクル順に一緒に確認）</div>
+  <div class="card meet-only"><div id="hpoints"></div></div>
+
+  <div class="sec no-print prep-only">アポ前 WEB一次分析（AIで“気づき”を引き出す）</div>
+  <div class="card no-print prep-only">
     <div class="row" style="margin-bottom:8px">
       <button class="btn pri" onclick="copyPrompt()">① AI分析プロンプトをコピー</button>
       <span class="muted">→ ChatGPT/Claudeに貼り付けて分析 → 出力を下に貼り戻し</span>
@@ -105,8 +140,8 @@ table.bm{border-collapse:collapse}
   <div class="sec">気づきハイライト（診断から自動生成）</div>
   <div class="hl" id="insight"></div>
 
-  <div class="sec">選考プロセス設定（企業に合わせてON/OFF）</div>
-  <div class="card row" id="cfg">
+  <div class="sec prep-only">選考プロセス設定（企業に合わせてON/OFF）</div>
+  <div class="card row prep-only" id="cfg">
     <span class="chip on lock">応募・内定・承諾</span>
     <span class="chip" data-k="doc">書類選考</span>
     <span class="chip" data-k="casual">カジュアル面談</span>
@@ -115,8 +150,8 @@ table.bm{border-collapse:collapse}
     <span class="chip" data-k="final">最終面接</span>
   </div>
 
-  <div class="sec">目安（歩留まり）設定 ─ 都度入力（職種・業界で調整）</div>
-  <div class="card row">
+  <div class="sec prep-only">目安（歩留まり）設定 ─ 都度入力（職種・業界で調整）</div>
+  <div class="card row prep-only">
     <span class="muted">職種プリセット</span><select id="preset"></select>
     <span>応募→書類 <input class="num bn" id="bm_ad" type="number">%</span>
     <span>書類→面接 <input class="num bn" id="bm_dm" type="number">%</span>
@@ -167,8 +202,9 @@ var presets={"標準":{ad:40,dm:85,mm:60,mo:45,oa:50},"営業":{ad:35,dm:80,mm:5
 var bm=Object.assign({},presets["標準"]);
 var defs=[{k:"apply",n:"応募",fix:1},{k:"doc",n:"書類通過",opt:1},{k:"casual",n:"カジュアル面談",opt:1},{k:"i1",n:"一次面接",fix:1},{k:"i2",n:"二次面接",opt:1},{k:"final",n:"最終面接",opt:1},{k:"offer",n:"内定",fix:1},{k:"accept",n:"承諾",fix:1}];
 var cfg={doc:true,casual:false,i1:true,i2:false,final:true};
-var vals={apply:120,doc:45,docfail:52,casual:0,i1:40,i2:0,final:24,offer:10,accept:3};
+var vals={};
 var names=["①知る","②惹かれる","③信頼する","④決断する","⑤活躍する"];
+var STC=["#2E8BC0","#00B0F0","#16A884","#5BB04A","#F2933C"];
 var steps=[
  {name:"知る",tog:["媒体プラン上位","スカウト配信","エージェント視点での条件良","SNS","採用サイトからの応募流入"],on:[1,0,0,0,1]},
  {name:"惹かれる",tog:["キャリア採用サイトの充実","求人の魅力が明確","採用動画","ターゲット視点での条件良"],on:[1,1,0,0]},
@@ -214,23 +250,23 @@ function renderFunnel(){
  var act=activeDefs(),host=document.getElementById("funnel");host.innerHTML="";
  act.forEach(function(d,i){
   var col=document.createElement("div");col.style="text-align:center";
-  col.innerHTML='<div style="font-size:11px;color:'+(d.k==="accept"?"var(--cyanD)":"var(--muted)")+';margin-bottom:3px">'+d.n+'</div><input class="num" id="v_'+d.k+'" type="number" min="0" value="'+(vals[d.k]||0)+'">';
+  col.innerHTML='<div style="font-size:11px;color:'+(d.k==="accept"?"var(--cyanD)":"var(--muted)")+';margin-bottom:3px">'+d.n+'</div><input class="num" id="v_'+d.k+'" type="number" min="0" value="'+(vals[d.k]||"")+'">';
   host.appendChild(col);
   if(i<act.length-1){var g=document.createElement("div");g.id="g_"+d.k;g.className="gate";g.style.paddingTop="18px";host.appendChild(g);}
  });
  act.forEach(function(d){document.getElementById("v_"+d.k).oninput=function(){vals[d.k]=+this.value||0;recompute();};});
  var ex=document.getElementById("funnelExtra");ex.innerHTML="";
  if(cfg.doc){
-  ex.innerHTML='<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--line)" class="muted">応募→書類通過の内訳　うち <b style="color:var(--warn)">書類不合格（ターゲット外）</b>：<input class="num bn" id="v_docfail" type="number" min="0" value="'+(vals.docfail||0)+'">名　残り＝応募後の離脱</div>';
+  ex.innerHTML='<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--line)" class="muted">応募→書類通過の内訳　うち <b style="color:var(--warn)">書類不合格（ターゲット外）</b>：<input class="num bn" id="v_docfail" type="number" min="0" value="'+(vals.docfail||"")+'">名　残り＝応募後の離脱</div>';
   document.getElementById("v_docfail").oninput=function(){vals.docfail=+this.value||0;recompute();};
  }
 }
 
 var sh=document.getElementById("steps");
 steps.forEach(function(s,si){
- var card=document.createElement("div");card.className="card";
+ var card=document.createElement("div");card.className="card";card.style.borderLeft="5px solid "+STC[si];
  var chips=s.tog.map(function(t,ti){return '<span class="chip'+(s.on[ti]?" on":"")+'" data-step="'+si+'">'+t+'</span>';}).join("");
- card.innerHTML='<div class="row"><span class="badge">'+(si+1)+'</span><b>'+s.name+'</b></div><div class="row" style="margin-top:8px">'+chips+'</div>';
+ card.innerHTML='<div class="row"><span class="badge" style="background:'+STC[si]+';box-shadow:none">'+(si+1)+'</span><b style="color:'+STC[si]+'">'+s.name+'</b></div><div class="row" style="margin-top:8px">'+chips+'</div>';
  sh.appendChild(card);
 });
 sh.querySelectorAll(".chip").forEach(function(c){c.onclick=function(){c.classList.toggle("on");recompute();};});
@@ -283,7 +319,7 @@ function recompute(){
 
  var met=[apply+'名',(docOn?("ターゲット外"+failR+"%／離脱"+dropR+"%"):("離脱"+dropR+"%")),("離脱"+dropR+"%／面接→内定"+Math.round(offerRate*100)+"%"),("内定→承諾"+Math.round(accRate*100)+"%"),("取り組み"+sh.querySelectorAll('.chip[data-step="4"].on').length+"/"+steps[4].tog.length)];
  document.getElementById("chart").innerHTML=chartSVG(sc);
- document.getElementById("cols").innerHTML=sc.map(function(v,i){var l=lv(v);return '<div><div style="font-size:12px;font-weight:bold">'+names[i]+'</div><div style="color:'+l[1]+'">'+l[0]+'</div><div class="muted" style="font-size:11px">'+met[i]+'</div></div>';}).join("");
+ document.getElementById("cols").innerHTML=sc.map(function(v,i){var l=lv(v);return '<div><div style="font-size:12px;font-weight:bold;color:'+STC[i]+'">'+names[i]+'</div><div style="color:'+l[1]+'">'+l[0]+'</div><div class="muted" style="font-size:11px">'+met[i]+'</div></div>';}).join("");
 
  var eff=document.getElementById("effect"),worst=-1,wgap=-1,wb=0;
  for(var i=0;i<act.length-1;i++){var a=act[i].k,bn=benchOf(a,act[i+1].k),ca=vals[a]||0,pc=ca>0?(vals[act[i+1].k]||0)/ca*100:0,gp=bn-pc;if(ca>0&&gp>wgap){wgap=gp;worst=i;wb=bn;}}
@@ -293,7 +329,7 @@ function recompute(){
  var weak=[0,1,2,3,4].map(function(i){return{i:i,sc:sc[i]};}).filter(function(o){return o.sc<65;}).sort(function(a,b){return a.sc-b.sc;}).slice(0,3);
  var mv=document.getElementById("moves");mv.innerHTML="";
  if(!weak.length)mv.innerHTML='<span class="muted">各ステップ良好。定着・リファラルで“ファン化”を強化。</span>';
- weak.forEach(function(o,idx){var es=pbStep(o.i).slice(0,2);var r=document.createElement("div");r.style.marginBottom="10px";r.innerHTML='<div class="row"><span class="badge">'+(idx+1)+'</span><b>'+steps[o.i].name+'</b></div>'+es.map(function(p){return '<div class="muted" style="margin:3px 0 0 30px">・'+p.move+' → <b style="color:var(--cyanD)">'+p.svc+'</b>（'+p.effect+'）</div>';}).join("");mv.appendChild(r);});
+ weak.forEach(function(o,idx){var es=pbStep(o.i).slice(0,2);var r=document.createElement("div");r.style.marginBottom="10px";r.innerHTML='<div class="row"><span class="badge" style="background:'+STC[o.i]+';box-shadow:none">'+(idx+1)+'</span><b style="color:'+STC[o.i]+'">'+steps[o.i].name+'</b></div>'+es.map(function(p){return '<div class="muted" style="margin:3px 0 0 30px">・'+p.move+' → <b style="color:'+STC[o.i]+'">'+p.svc+'</b>（'+p.effect+'）</div>';}).join("");mv.appendChild(r);});
 
  var ins=document.getElementById("insight");
  var lines=['<b>ボトルネック：</b>'+steps[low].name+'（スコア'+sc[low]+'）'];
@@ -321,8 +357,18 @@ function copyPrompt(){
  var p="以下の企業のキャリア（中途）採用を、WEB上の公開情報から分析してください。\n企業名: "+c+"\n対象URL（種別つき）:\n"+u+"\n\n各ステップごとに【所見】【気づき】【初回アポで確認したい数値】を簡潔に。\n①知る（発見性）: 採用サイト/媒体/Indeed/SNSの露出\n②惹かれる（魅力）: 採用サイトの充実度・更新・スマホ対応／求人の魅力・条件・ターゲット適合（競合比較で選ばれるか）\n③信頼する（選考体験）: 口コミ評価\n④決断・⑤活躍: WEBでは不可のため『当日ヒアリング』と記載\n\n最後に『最も伸びしろがありそうなステップ』と『初回アポでのトークの切り口』を1〜2行で。";
  navigator.clipboard.writeText(p).then(function(){var e=document.getElementById("copied");e.style.display="inline";setTimeout(function(){e.style.display="none";},1800);});
 }
-function onAi(){var v=document.getElementById("aiNote").value,s=document.getElementById("aiShow");if(v.trim()){s.style.display="block";s.textContent=v;}else s.style.display="none";}
+function onAi(){var v=document.getElementById("aiNote").value,s=document.getElementById("aiShow");if(v.trim()){s.style.display="block";s.textContent=v;}else s.style.display="none";var m=document.getElementById("meetAi");if(m)m.textContent=v.trim()?v:"（準備モードでAI分析結果を貼り付けると、ここに表示されます）";}
 
+var hpoints=[
+ {pc:"#2E8BC0",n:"①知る",pts:["応募数（月平均）と経路の内訳","媒体プラン／Indeed等の運用状況","スカウト送信数・返信率","エージェント経由の比率と評価"]},
+ {pc:"#00B0F0",n:"②惹かれる",pts:["採用サイトの有無・更新頻度・スマホ対応","求人原稿の訴求（ターゲットに刺さるか）","書類通過率（応募→書類OK）","ターゲット外応募の多さ"]},
+ {pc:"#16A884",n:"③信頼する",pts:["応募〜初回連絡のスピード","面接設定率・日程調整のしやすさ","面接官の体制・惹きつけ","面接通過率／辞退・音信不通の数と理由"]},
+ {pc:"#5BB04A",n:"④決断する",pts:["内定数・承諾数・辞退数","辞退理由（他社競合／条件／家族）","オファー面談・条件提示の仕方","クロージング施策の有無"]},
+ {pc:"#F2933C",n:"⑤活躍する",pts:["入社後フォロー・オンボーディング","早期離職・定着率","リファラルの有無","活躍人材のモデル化"]}
+];
+function renderHP(){var h=document.getElementById("hpoints");if(!h)return;h.innerHTML=hpoints.map(function(s){return '<div class="hpcard" style="--pc:'+s.pc+'"><b style="color:'+s.pc+'">'+s.n+'</b><ul style="margin:5px 0 0;padding-left:20px">'+s.pts.map(function(p){return '<li>'+p+'</li>';}).join("")+'</ul></div>';}).join("");}
+function updateMeetHead(){var c=document.getElementById("company").value.trim();var e=document.getElementById("meetCompany");if(e)e.textContent=c||"（会社名）";}
+function setMode(m){document.body.className=document.body.className.replace(/mode-\w+/g,"").trim()+" mode-"+m;document.getElementById("mPrep").classList.toggle("act",m==="prep");document.getElementById("mMeet").classList.toggle("act",m==="meet");updateMeetHead();window.scrollTo(0,0);}
 /* 保存・読込（localStorage） */
 function state(){return{company:document.getElementById("company").value,urls:getUrls(),aiNote:document.getElementById("aiNote").value,cfg:cfg,vals:vals,bm:bm,preset:ps.value,actions:steps.map(function(s,si){return [].slice.call(sh.querySelectorAll('.chip[data-step="'+si+'"]')).map(function(c){return c.classList.contains("on")?1:0;});})};}
 function store(){try{return JSON.parse(localStorage.getItem("fanshindan")||"{}");}catch(e){return{};}}
@@ -332,7 +378,7 @@ document.getElementById("loadSel").onchange=function(){var k=this.value;if(!k)re
 function newCase(){if(!confirm("新規診断を開始しますか？（未保存の入力は消えます）"))return;location.reload();}
 
 ["doc","casual","i2","final"].forEach(function(k){var c=document.querySelector('#cfg .chip[data-k="'+k+'"]');if(cfg[k])c.classList.add("on");});
-seedUrls();fillBM();renderFunnel();refreshList();recompute();
+seedUrls();fillBM();renderFunnel();refreshList();renderHP();document.getElementById("company").addEventListener("input",updateMeetHead);setMode("prep");recompute();
 </script>
 </body>
 </html>

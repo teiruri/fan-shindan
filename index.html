@@ -20,12 +20,12 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:"Yu Gothic","Mei
 select,input[type=text],input[type=number],textarea{font-family:inherit;border:1px solid var(--line);border-radius:8px;padding:7px 9px;font-size:14px;background:#fff;color:var(--ink)}
 input[type=number]{text-align:center}
 .sec{margin:24px 0 9px;font-size:14px;color:var(--ink);font-weight:bold;padding-left:11px;position:relative}
-.sec::before{content:"";position:absolute;left:0;top:3px;bottom:3px;width:4px;border-radius:2px;background:linear-gradient(180deg,var(--cyan),#16A884)}
+.sec::before{content:"";position:absolute;left:0;top:3px;bottom:3px;width:4px;border-radius:2px;background:var(--cyan)}
 .card{background:var(--card);border:1px solid #dbe3e8;border-radius:12px;padding:15px 17px;margin-bottom:10px;box-shadow:0 2px 7px rgba(10,42,58,.06)}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .chip{font-size:12.5px;padding:6px 12px;border:1px solid #cdd8df;border-radius:999px;cursor:pointer;color:var(--body);background:#fff;user-select:none;display:inline-flex;align-items:center;gap:5px;transition:.12s}
 .chip:hover{border-color:var(--cyan)}
-.chip.on{border-color:var(--cyan);background:var(--cyan);color:#fff;font-weight:bold;box-shadow:0 2px 6px rgba(0,176,240,.35)}
+.chip.on{border-color:#9AD3AE;background:#E2F3E6;color:#2F8F5A;font-weight:bold;box-shadow:none}
 .chip.on::before{content:"✓";font-size:11px;font-weight:bold}
 .chip.lock{opacity:.6;cursor:default}
 .num{width:64px;height:34px}
@@ -44,7 +44,7 @@ input[type=number]{text-align:center}
 table.bm{border-collapse:collapse}
 .flow{display:flex;gap:7px;align-items:stretch;flex-wrap:wrap}
 .pcard{flex:1 1 165px;background:#fff;border:1px solid #dbe3e8;border-top:4px solid var(--pc,#00B0F0);border-radius:10px;padding:12px 13px 13px;min-height:134px;box-shadow:0 2px 7px rgba(10,42,58,.06)}
-.pn{display:flex;width:27px;height:27px;border-radius:50%;background:var(--pc,#00B0F0);color:#fff;font-weight:bold;align-items:center;justify-content:center;font-size:14px;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.pn{display:flex;width:27px;height:27px;border-radius:50%;background:var(--pp,#DDEAF8);color:var(--pc,#2F66A8);font-weight:bold;align-items:center;justify-content:center;font-size:14px;margin-bottom:8px}
 .pcard b{font-size:13px;line-height:1.42;color:var(--ink);display:block;margin-bottom:5px}
 .parrow{display:flex;align-items:center;color:#c1ccd3;font-size:18px;font-weight:bold}
 /* === 視認性 & アポ商談モード === */
@@ -92,15 +92,15 @@ body.mode-meet .hpcard li{font-size:15px}
   <div class="sec prep-only">ご利用の流れ（アポ取得 → 結果アウトプット）</div>
   <div class="card prep-only">
     <div class="flow">
-      <div class="pcard" style="--pc:#2E8BC0"><div class="pn">1</div><b>アポ取得（テレアポ）</b><div class="muted">「WEB情報から無料診断します」をフックに初回アポ獲得</div></div>
+      <div class="pcard" style="--pc:#2F66A8;--pp:#DDEAF8"><div class="pn">1</div><b>アポ取得（テレアポ）</b><div class="muted">「WEB情報から無料診断します」をフックに初回アポ獲得</div></div>
       <div class="parrow">›</div>
-      <div class="pcard" style="--pc:#00B0F0"><div class="pn">2</div><b>アポ前｜WEB一次分析〈AI〉</b><div class="muted">URL→AIが採用サイト/口コミ/求人を分析→一次診断(仮)＋トーク草案</div></div>
+      <div class="pcard" style="--pc:#1F8C84;--pp:#D2F0EC"><div class="pn">2</div><b>アポ前｜WEB一次分析〈AI〉</b><div class="muted">URL→AIが採用サイト/口コミ/求人を分析→一次診断(仮)＋トーク草案</div></div>
       <div class="parrow">›</div>
-      <div class="pcard" style="--pc:#16A884"><div class="pn">3</div><b>初回アポ｜ヒアリング〈画面共有〉</b><div class="muted">ファネル人数・取り組み・所感を一緒に入力→診断を確定</div></div>
+      <div class="pcard" style="--pc:#6A5BAE;--pp:#E8E3F6"><div class="pn">3</div><b>初回アポ｜ヒアリング〈画面共有〉</b><div class="muted">ファネル人数・取り組み・所感を一緒に入力→診断を確定</div></div>
       <div class="parrow">›</div>
-      <div class="pcard" style="--pc:#5BB04A"><div class="pn">4</div><b>診断結果</b><div class="muted">到達度カーブ・2つの取りこぼし・ボトルネック・期待効果</div></div>
+      <div class="pcard" style="--pc:#B9822A;--pp:#FBEDD3"><div class="pn">4</div><b>診断結果</b><div class="muted">到達度カーブ・2つの取りこぼし・ボトルネック・期待効果</div></div>
       <div class="parrow">›</div>
-      <div class="pcard" style="--pc:#F2933C"><div class="pn">5</div><b>アウトプット＆提案</b><div class="muted">PDFを置き土産→打ち手DBから提案（TRACE/クロージング/伴走/TRAY）</div></div>
+      <div class="pcard" style="--pc:#BD5E80;--pp:#FAE1EA"><div class="pn">5</div><b>アウトプット＆提案</b><div class="muted">PDFを置き土産→打ち手DBから提案（TRACE/クロージング/伴走/TRAY）</div></div>
     </div>
     <div class="muted" style="margin-top:10px;text-align:center">最重視：候補者を“承諾者”に引き上げる<b style="color:var(--cyanD)">「気づき」</b>　／　無料で双方<b style="color:var(--cyanD)">“軽い”</b>運用（事前にAIで7〜8割、当日は数値の穴埋めだけ）</div>
   </div>
@@ -121,7 +121,7 @@ body.mode-meet .hpcard li{font-size:15px}
   <div class="card meet-only">
     <div style="font-size:23px;font-weight:bold;color:var(--dark)" id="meetCompany">（会社名）</div>
     <div class="muted" style="margin-bottom:10px">WEB上の公開情報をもとに、現状を一緒に確認していきます。</div>
-    <div id="meetAi" class="hl" style="white-space:pre-wrap;font-size:15px;line-height:1.7">（準備モードでAI分析結果を貼り付けると、ここに表示されます）</div>
+    <div id="meetAi" style="font-size:15px;line-height:1.7">（準備モードでAI分析結果を貼り付けると、ここに整形表示されます）</div>
   </div>
   <div class="sec meet-only">ヒアリングポイント（FANサイクル順に一緒に確認）</div>
   <div class="card meet-only"><div id="hpoints"></div></div>
@@ -204,7 +204,8 @@ var defs=[{k:"apply",n:"応募",fix:1},{k:"doc",n:"書類通過",opt:1},{k:"casu
 var cfg={doc:true,casual:false,i1:true,i2:false,final:true};
 var vals={};
 var names=["①知る","②惹かれる","③信頼する","④決断する","⑤活躍する"];
-var STC=["#2E8BC0","#00B0F0","#16A884","#5BB04A","#F2933C"];
+var STC=["#2F66A8","#1F8C84","#6A5BAE","#B9822A","#BD5E80"];
+var STP=["#DDEAF8","#D2F0EC","#E8E3F6","#FBEDD3","#FAE1EA"];
 var steps=[
  {name:"知る",tog:["媒体プラン上位","スカウト配信","エージェント視点での条件良","SNS","採用サイトからの応募流入"],on:[1,0,0,0,1]},
  {name:"惹かれる",tog:["キャリア採用サイトの充実","求人の魅力が明確","採用動画","ターゲット視点での条件良"],on:[1,1,0,0]},
@@ -214,20 +215,20 @@ var steps=[
 ];
 /* 打ち手DB（playbook）たたき台：FANサイクル×課題→施策→サービス→期待効果。企画書・自社サービス群を参照 */
 var playbook=[
- {step:0,move:"媒体プランの最適化・適切なプラン選定",svc:"REVP（効果検証）",effect:"母集団の量を確保"},
- {step:0,move:"採用サイトのSEO・求人検索エンジン連携",svc:"TRACE",effect:"自然流入・発見性UP"},
- {step:0,move:"スカウト/ダイレクトリクルーティング強化",svc:"スカウト運用支援",effect:"狙った層へ直接接触"},
- {step:1,move:"キャリア採用サイトの制作・刷新（社員ストーリー/数字で見る/動画）",svc:"TRACE",effect:"“見たときに選ばれる”状態に"},
- {step:1,move:"求人の魅力・ターゲット設計（コンセプト/コピー）",svc:"制作顧問（クリエイティブ）",effect:"競合比較で選ばれる／ターゲット外を削減"},
- {step:1,move:"採用コンテンツの継続提供（記事・社員紹介）",svc:"TRAY（定額コンテンツ）",effect:"情報量を増やし応募意欲を喚起"},
- {step:2,move:"応募への即時対応・面接調整の即連絡の体制づくり",svc:"採用代行（RPO・伴走）",effect:"放置ゼロで離脱を防止"},
- {step:2,move:"面接官の惹きつけ・惹きつけシナリオの標準化・評価基準整備",svc:"面接最適化支援",effect:"面接のブレをなくし内定率UP"},
- {step:2,move:"候補者フォロー・ナーチャリング設計",svc:"伴走支援",effect:"選考中の不安を解消・志望度を維持"},
- {step:3,move:"クロージングシナリオ（勝ちパターン）の設計・オファー面談",svc:"伴走支援",effect:"意思決定を後押し・承諾率UP"},
- {step:3,move:"オファーレター／クロージングブック（本人＋家族の安心材料）",svc:"クロージングブック制作",effect:"家族ブロックに対応し承諾率UP"},
- {step:4,move:"オンボーディング設計・入社後の人事面談",svc:"HR Ring",effect:"早期離職を防止"},
- {step:4,move:"定着支援・キャリア入社活躍モデルの確立",svc:"Beatban",effect:"活躍・定着を促進"},
- {step:4,move:"リファラル促進（社員紹介の仕組み化）",svc:"TRAY/リファラル支援",effect:"活躍人材が次の“認知”を生む好循環"}
+ {step:0,issue:"母集団の量が不足／媒体が最適化されていない",solve:"媒体プランを見直し、配信を最適化する",svc:"REVP（効果検証）"},
+ {step:0,issue:"指名検索に偏り、自然流入が弱い",solve:"採用サイトのSEO・求人検索エンジン連携で発見性を高める",svc:"TRACE"},
+ {step:0,issue:"狙った層へ情報が届いていない",solve:"スカウト／ダイレクトリクルーティングを強化する",svc:"スカウト運用支援"},
+ {step:1,issue:"採用サイトが弱く、見たときに選ばれない",solve:"採用サイトを制作・刷新し、魅力を可視化する（社員ストーリー/数字/動画）",svc:"TRACE"},
+ {step:1,issue:"求人の訴求がターゲットに刺さっていない",solve:"コンセプト・コピーを設計し、競合比較で選ばれる状態をつくる",svc:"制作顧問（クリエイティブ）"},
+ {step:1,issue:"情報量が少なく応募意欲が湧きにくい",solve:"採用コンテンツを継続発信し、関心を醸成する",svc:"TRAY（定額コンテンツ）"},
+ {step:2,issue:"応募後の対応が遅く、離脱が起きている",solve:"即時対応・即連絡の体制を整える",svc:"採用代行（RPO・伴走）"},
+ {step:2,issue:"面接の魅力づけ・評価基準にばらつきがある",solve:"面接官の惹きつけとシナリオを標準化し、基準を整備する",svc:"面接最適化支援"},
+ {step:2,issue:"選考中の不安で志望度が下がる",solve:"候補者フォロー・ナーチャリングを設計する",svc:"伴走支援"},
+ {step:3,issue:"クロージングが属人的で承諾が安定しない",solve:"勝ちパターンのクロージングシナリオ・オファー面談を設計する",svc:"伴走支援"},
+ {step:3,issue:"本人・家族の不安で辞退が出る",solve:"オファーレター／クロージングブックで安心材料を提示する",svc:"クロージングブック制作"},
+ {step:4,issue:"入社後フォロー不足で早期離職が起きる",solve:"オンボーディング・入社後の人事面談を設計する",svc:"HR Ring"},
+ {step:4,issue:"育成・活躍モデルが未整備",solve:"定着支援とキャリア入社の活躍モデルを確立する",svc:"Beatban"},
+ {step:4,issue:"紹介が生まれる仕組みがない",solve:"リファラル（社員紹介）を仕組み化する",svc:"TRAY/リファラル支援"}
 ];
 function pbStep(i){return playbook.filter(function(p){return p.step===i;});}
 function benchOf(a,b){ if(a==="apply")return b==="doc"?bm.ad:50; if(a==="doc")return bm.dm; if(a==="casual")return 80; if(a==="final")return bm.mo; if(a==="i1"||a==="i2")return b==="offer"?bm.mo:bm.mm; if(a==="offer")return bm.oa; return 50; }
@@ -266,7 +267,7 @@ var sh=document.getElementById("steps");
 steps.forEach(function(s,si){
  var card=document.createElement("div");card.className="card";card.style.borderLeft="5px solid "+STC[si];
  var chips=s.tog.map(function(t,ti){return '<span class="chip'+(s.on[ti]?" on":"")+'" data-step="'+si+'">'+t+'</span>';}).join("");
- card.innerHTML='<div class="row"><span class="badge" style="background:'+STC[si]+';box-shadow:none">'+(si+1)+'</span><b style="color:'+STC[si]+'">'+s.name+'</b></div><div class="row" style="margin-top:8px">'+chips+'</div>';
+ card.innerHTML='<div class="row"><span class="badge" style="background:'+STP[si]+';color:'+STC[si]+';box-shadow:none">'+(si+1)+'</span><b style="color:'+STC[si]+'">'+s.name+'</b></div><div class="row" style="margin-top:8px">'+chips+'</div>';
  sh.appendChild(card);
 });
 sh.querySelectorAll(".chip").forEach(function(c){c.onclick=function(){c.classList.toggle("on");recompute();};});
@@ -315,7 +316,7 @@ function recompute(){
  document.getElementById("ov").textContent=ov;
  document.getElementById("ovlv").innerHTML='<span style="color:'+L[1]+'">'+L[0]+' '+(ov>=75?"良好":ov>=60?"標準":ov>=40?"要改善":"要注力")+'</span>';
  var low=1;[2,3].forEach(function(i){if(sc[i]<sc[low])low=i;});
- document.getElementById("summary").innerHTML='<div><div style="color:var(--cyanD);font-size:12px">最も伸びしろのあるステップ</div><div style="font-size:16px;font-weight:bold">'+steps[low].name+'（スコア '+sc[low]+'）</div><div class="muted">'+pbStep(low)[0].move+'</div></div>';
+ document.getElementById("summary").innerHTML='<div><div style="color:var(--cyanD);font-size:12px">最も伸びしろのあるステップ</div><div style="font-size:16px;font-weight:bold">'+steps[low].name+'（スコア '+sc[low]+'）</div><div class="muted">'+pbStep(low)[0].solve+'</div></div>';
 
  var met=[apply+'名',(docOn?("ターゲット外"+failR+"%／離脱"+dropR+"%"):("離脱"+dropR+"%")),("離脱"+dropR+"%／面接→内定"+Math.round(offerRate*100)+"%"),("内定→承諾"+Math.round(accRate*100)+"%"),("取り組み"+sh.querySelectorAll('.chip[data-step="4"].on').length+"/"+steps[4].tog.length)];
  document.getElementById("chart").innerHTML=chartSVG(sc);
@@ -329,7 +330,7 @@ function recompute(){
  var weak=[0,1,2,3,4].map(function(i){return{i:i,sc:sc[i]};}).filter(function(o){return o.sc<65;}).sort(function(a,b){return a.sc-b.sc;}).slice(0,3);
  var mv=document.getElementById("moves");mv.innerHTML="";
  if(!weak.length)mv.innerHTML='<span class="muted">各ステップ良好。定着・リファラルで“ファン化”を強化。</span>';
- weak.forEach(function(o,idx){var es=pbStep(o.i).slice(0,2);var r=document.createElement("div");r.style.marginBottom="10px";r.innerHTML='<div class="row"><span class="badge" style="background:'+STC[o.i]+';box-shadow:none">'+(idx+1)+'</span><b style="color:'+STC[o.i]+'">'+steps[o.i].name+'</b></div>'+es.map(function(p){return '<div class="muted" style="margin:3px 0 0 30px">・'+p.move+' → <b style="color:'+STC[o.i]+'">'+p.svc+'</b>（'+p.effect+'）</div>';}).join("");mv.appendChild(r);});
+ weak.forEach(function(o,idx){var es=pbStep(o.i).slice(0,2);var r=document.createElement("div");r.style.marginBottom="14px";r.innerHTML='<div class="row" style="margin-bottom:4px"><span class="badge" style="background:'+STP[o.i]+';color:'+STC[o.i]+';box-shadow:none">'+(idx+1)+'</span><b style="color:'+STC[o.i]+'">カテゴリー：'+steps[o.i].name+'</b></div>'+es.map(function(p){return '<div style="margin:0 0 7px 30px;padding:7px 0 7px 12px;border-left:3px solid '+STP[o.i]+'"><div><span class="muted">具体的な課題：</span>'+p.issue+'</div><div style="margin-top:2px"><span class="muted">解決すべき事柄：</span><b>'+p.solve+'</b></div><div class="muted" style="font-size:11px;margin-top:3px">サービス：'+p.svc+'</div></div>';}).join("");mv.appendChild(r);});
 
  var ins=document.getElementById("insight");
  var lines=['<b>ボトルネック：</b>'+steps[low].name+'（スコア'+sc[low]+'）'];
@@ -354,10 +355,10 @@ function seedUrls(list){var w=document.getElementById("urls");w.innerHTML="";if(
 function copyPrompt(){
  var c=document.getElementById("company").value||"（企業名）";
  var us=getUrls(),u=us.length?us.map(function(x){return "・"+x.type+"："+x.url;}).join("\n"):"（URL未入力）";
- var p="以下の企業のキャリア（中途）採用を、WEB上の公開情報から分析してください。\n企業名: "+c+"\n対象URL（種別つき）:\n"+u+"\n\n各ステップごとに【所見】【気づき】【初回アポで確認したい数値】を簡潔に。\n①知る（発見性）: 採用サイト/媒体/Indeed/SNSの露出\n②惹かれる（魅力）: 採用サイトの充実度・更新・スマホ対応／求人の魅力・条件・ターゲット適合（競合比較で選ばれるか）\n③信頼する（選考体験）: 口コミ評価\n④決断・⑤活躍: WEBでは不可のため『当日ヒアリング』と記載\n\n最後に『最も伸びしろがありそうなステップ』と『初回アポでのトークの切り口』を1〜2行で。";
+ var p="以下の企業のキャリア（中途）採用を、WEB上の公開情報から分析してください。\n企業名: "+c+"\n対象URL（種別つき）:\n"+u+"\n\nこの結果は営業の初回アポで『事前調査のフィードバック→アイスブレイク→ヒアリングの前振り』に使います。\n\n【重要】出力は下記JSONのみ。前後に説明文やコードブロック記号は付けないこと。\n{\n  \"icebreak\": \"アポ冒頭で使える一言（事前に拝見した上での具体的な称賛＋関心。1文）\",\n  \"summary\": \"全体所感を2〜3文。良い点→伸びしろの順で前向きに。\",\n  \"steps\": [\n    {\"step\": \"①知る\", \"finding\": \"WEB上の所見（事実）\", \"insight\": \"気づき・仮説\", \"ask\": \"初回アポで確認したい数値／ヒアリングへの前振りトーク\"},\n    {\"step\": \"②惹かれる\", \"finding\": \"\", \"insight\": \"\", \"ask\": \"\"},\n    {\"step\": \"③信頼する\", \"finding\": \"口コミ等\", \"insight\": \"\", \"ask\": \"\"},\n    {\"step\": \"④決断する\", \"finding\": \"WEBでは不可のため『当日ヒアリング』\", \"insight\": \"\", \"ask\": \"\"},\n    {\"step\": \"⑤活躍する\", \"finding\": \"WEBでは不可のため『当日ヒアリング』\", \"insight\": \"\", \"ask\": \"\"}\n  ],\n  \"focus\": \"最も伸びしろがありそうなステップ名（例：②惹かれる）\",\n  \"bridge\": \"ヒアリングへ自然につなぐ一言（例：では実際の応募〜入社の数字を一緒に見ながら…）\"\n}\nJSON以外は出力しないこと。";
  navigator.clipboard.writeText(p).then(function(){var e=document.getElementById("copied");e.style.display="inline";setTimeout(function(){e.style.display="none";},1800);});
 }
-function onAi(){var v=document.getElementById("aiNote").value,s=document.getElementById("aiShow");if(v.trim()){s.style.display="block";s.textContent=v;}else s.style.display="none";var m=document.getElementById("meetAi");if(m)m.textContent=v.trim()?v:"（準備モードでAI分析結果を貼り付けると、ここに表示されます）";}
+function onAi(){var v=document.getElementById("aiNote").value,s=document.getElementById("aiShow");if(v.trim()){s.style.display="block";s.textContent=v;}else s.style.display="none";renderMeetAi();}
 
 var hpoints=[
  {pc:"#2E8BC0",n:"①知る",pts:["応募数（月平均）と経路の内訳","媒体プラン／Indeed等の運用状況","スカウト送信数・返信率","エージェント経由の比率と評価"]},
@@ -366,9 +367,21 @@ var hpoints=[
  {pc:"#5BB04A",n:"④決断する",pts:["内定数・承諾数・辞退数","辞退理由（他社競合／条件／家族）","オファー面談・条件提示の仕方","クロージング施策の有無"]},
  {pc:"#F2933C",n:"⑤活躍する",pts:["入社後フォロー・オンボーディング","早期離職・定着率","リファラルの有無","活躍人材のモデル化"]}
 ];
-function renderHP(){var h=document.getElementById("hpoints");if(!h)return;h.innerHTML=hpoints.map(function(s){return '<div class="hpcard" style="--pc:'+s.pc+'"><b style="color:'+s.pc+'">'+s.n+'</b><ul style="margin:5px 0 0;padding-left:20px">'+s.pts.map(function(p){return '<li>'+p+'</li>';}).join("")+'</ul></div>';}).join("");}
+function renderHP(){var h=document.getElementById("hpoints");if(!h)return;h.innerHTML=hpoints.map(function(s,i){var pc=STC[i];return '<div class="hpcard" style="--pc:'+pc+'"><b style="color:'+pc+'">'+s.n+'</b><ul style="margin:5px 0 0;padding-left:20px">'+s.pts.map(function(p){return '<li>'+p+'</li>';}).join("")+'</ul></div>';}).join("");}
 function updateMeetHead(){var c=document.getElementById("company").value.trim();var e=document.getElementById("meetCompany");if(e)e.textContent=c||"（会社名）";}
-function setMode(m){document.body.className=document.body.className.replace(/mode-\w+/g,"").trim()+" mode-"+m;document.getElementById("mPrep").classList.toggle("act",m==="prep");document.getElementById("mMeet").classList.toggle("act",m==="meet");updateMeetHead();window.scrollTo(0,0);}
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function parseAI(t){if(!t||!t.trim())return null;var s=t.indexOf("{"),e=t.lastIndexOf("}");if(s<0||e<0||e<=s)return null;try{return JSON.parse(t.slice(s,e+1));}catch(err){return null;}}
+function renderMeetAi(){var m=document.getElementById("meetAi");if(!m)return;var t=document.getElementById("aiNote").value;var d=parseAI(t);
+ if(!d){m.innerHTML=t.trim()?'<div class="muted" style="margin-bottom:6px">※AIの出力をJSON形式で貼り付けると、要約・トークに自動整形されます（現在は原文表示）。</div><div style="white-space:pre-wrap">'+esc(t)+'</div>':'（準備モードでAI分析結果を貼り付けると、ここに整形表示されます）';return;}
+ var h="";
+ if(d.icebreak)h+='<div style="background:#eef7fb;border:1px solid #bfe6f8;border-left:5px solid var(--cyan);border-radius:10px;padding:12px 14px;margin-bottom:10px"><b style="color:var(--cyanD)">🤝 アイスブレイク</b><div style="font-size:16px;margin-top:3px">'+esc(d.icebreak)+'</div></div>';
+ if(d.summary)h+='<div class="hl" style="margin-bottom:10px"><b style="color:var(--cyanD)">事前調査の全体所感</b><div style="margin-top:3px;line-height:1.7">'+esc(d.summary)+'</div></div>';
+ if(d.steps&&d.steps.length){h+='<div style="font-weight:bold;margin:4px 0 6px">ステップ別：所見 → 気づき → ヒアリング前振り</div>';d.steps.forEach(function(st,i){var pc=STC[i]||"#00B0F0";h+='<div class="hpcard" style="--pc:'+pc+'"><b style="color:'+pc+'">'+esc(st.step||names[i])+'</b>';if(st.finding)h+='<div style="margin-top:3px"><span class="muted">所見：</span>'+esc(st.finding)+'</div>';if(st.insight)h+='<div><span class="muted">気づき：</span>'+esc(st.insight)+'</div>';if(st.ask)h+='<div style="margin-top:2px;color:'+pc+'"><b>前振り：</b>'+esc(st.ask)+'</div>';h+='</div>';});}
+ if(d.focus)h+='<div style="margin:8px 0 4px"><b>最も伸びしろ：</b><span style="color:var(--cyanD);font-weight:bold">'+esc(d.focus)+'</span></div>';
+ if(d.bridge)h+='<div style="background:#15607D;color:#fff;border-radius:10px;padding:12px 14px;margin-top:6px"><b style="color:#bfe9f8">→ ヒアリングへの接続</b><div style="margin-top:3px;font-size:16px;line-height:1.6">'+esc(d.bridge)+'</div></div>';
+ m.innerHTML=h;
+}
+function setMode(m){document.body.className=document.body.className.replace(/mode-\w+/g,"").trim()+" mode-"+m;document.getElementById("mPrep").classList.toggle("act",m==="prep");document.getElementById("mMeet").classList.toggle("act",m==="meet");updateMeetHead();renderMeetAi();window.scrollTo(0,0);}
 /* 保存・読込（localStorage） */
 function state(){return{company:document.getElementById("company").value,urls:getUrls(),aiNote:document.getElementById("aiNote").value,cfg:cfg,vals:vals,bm:bm,preset:ps.value,actions:steps.map(function(s,si){return [].slice.call(sh.querySelectorAll('.chip[data-step="'+si+'"]')).map(function(c){return c.classList.contains("on")?1:0;});})};}
 function store(){try{return JSON.parse(localStorage.getItem("fanshindan")||"{}");}catch(e){return{};}}

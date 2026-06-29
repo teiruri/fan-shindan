@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ファンづくり採用診断</title>
 <style>
-:root{--cyan:#00B0F0;--cyanD:#0089c4;--cyanL:#E2F4FD;--dark:#0A2A3A;--yellow:#FFD400;--ink:#16242c;--body:#44535c;--muted:#8a99a3;--line:#e3e9ed;--card:#fff;--bg:#f4f8fb;--ok:#1f9e6a;--warn:#d98a0c;--bad:#d8453c;--okbg:#e7f5ee;--warnbg:#fcf1da;--badbg:#fbe9e7}
+:root{--cyan:#00B0F0;--cyanD:#0089c4;--cyanL:#E2F4FD;--dark:#0A2A3A;--yellow:#FFD400;--ink:#16242c;--body:#44535c;--muted:#586872;--line:#e3e9ed;--card:#fff;--bg:#f4f8fb;--ok:#1f9e6a;--warn:#d98a0c;--bad:#d8453c;--okbg:#e7f5ee;--warnbg:#fcf1da;--badbg:#fbe9e7}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Yu Gothic","Meiryo",-apple-system,sans-serif;font-size:14px;line-height:1.6}
 .wrap{max-width:980px;margin:0 auto;padding:0 16px 60px}
@@ -45,7 +45,8 @@ table.bm{border-collapse:collapse}
 .flow{display:flex;gap:7px;align-items:stretch;flex-wrap:wrap}
 .pcard{flex:1 1 165px;background:#fff;border:1px solid #dbe3e8;border-top:4px solid var(--pc,#00B0F0);border-radius:10px;padding:12px 13px 13px;min-height:134px;box-shadow:0 2px 7px rgba(10,42,58,.06)}
 .pn{display:flex;width:27px;height:27px;border-radius:50%;background:var(--pp,#DDEAF8);color:var(--pc,#2F66A8);font-weight:bold;align-items:center;justify-content:center;font-size:14px;margin-bottom:8px}
-.pcard b{font-size:13px;line-height:1.42;color:var(--ink);display:block;margin-bottom:5px}
+.pcard b{font-size:13.5px;line-height:1.4;color:var(--ink);display:block;margin-bottom:5px;word-break:keep-all}
+.psub{font-size:11px;font-weight:normal;color:var(--muted)}
 .parrow{display:flex;align-items:center;color:#c1ccd3;font-size:18px;font-weight:bold}
 /* === 視認性 & アポ商談モード === */
 .num{width:72px;height:40px;font-size:18px;font-weight:bold}
@@ -92,15 +93,15 @@ body.mode-meet .hpcard li{font-size:15px}
   <div class="sec prep-only">ご利用の流れ（アポ取得 → 結果アウトプット）</div>
   <div class="card prep-only">
     <div class="flow">
-      <div class="pcard" style="--pc:#2F66A8;--pp:#DDEAF8"><div class="pn">1</div><b>アポ取得（テレアポ）</b><div class="muted">「WEB情報から無料診断します」をフックに初回アポ獲得</div></div>
+      <div class="pcard" style="--pc:#2F66A8;--pp:#DDEAF8"><div class="pn">1</div><b>アポ取得<br><span class="psub">テレアポ</span></b><div class="muted">「WEB情報から無料診断します」をフックに初回アポ獲得</div></div>
       <div class="parrow">›</div>
-      <div class="pcard" style="--pc:#1F8C84;--pp:#D2F0EC"><div class="pn">2</div><b>アポ前｜WEB一次分析〈AI〉</b><div class="muted">URL→AIが採用サイト/口コミ/求人を分析→一次診断(仮)＋トーク草案</div></div>
+      <div class="pcard" style="--pc:#1F8C84;--pp:#D2F0EC"><div class="pn">2</div><b>WEB一次分析<br><span class="psub">アポ前・AIで実施</span></b><div class="muted">URL→AIが採用サイト/口コミ/求人を分析→一次診断(仮)＋トーク草案</div></div>
       <div class="parrow">›</div>
-      <div class="pcard" style="--pc:#6A5BAE;--pp:#E8E3F6"><div class="pn">3</div><b>初回アポ｜ヒアリング〈画面共有〉</b><div class="muted">ファネル人数・取り組み・所感を一緒に入力→診断を確定</div></div>
+      <div class="pcard" style="--pc:#6A5BAE;--pp:#E8E3F6"><div class="pn">3</div><b>ヒアリング<br><span class="psub">初回アポ・画面共有</span></b><div class="muted">ファネル人数・取り組み・所感を一緒に入力→診断を確定</div></div>
       <div class="parrow">›</div>
-      <div class="pcard" style="--pc:#B9822A;--pp:#FBEDD3"><div class="pn">4</div><b>診断結果</b><div class="muted">到達度カーブ・2つの取りこぼし・ボトルネック・期待効果</div></div>
+      <div class="pcard" style="--pc:#B9822A;--pp:#FBEDD3"><div class="pn">4</div><b>診断結果<br><span class="psub">その場で算出</span></b><div class="muted">到達度カーブ・2つの取りこぼし・ボトルネック・期待効果</div></div>
       <div class="parrow">›</div>
-      <div class="pcard" style="--pc:#BD5E80;--pp:#FAE1EA"><div class="pn">5</div><b>アウトプット＆提案</b><div class="muted">PDFを置き土産→打ち手DBから提案（TRACE/クロージング/伴走/TRAY）</div></div>
+      <div class="pcard" style="--pc:#BD5E80;--pp:#FAE1EA"><div class="pn">5</div><b>アウトプット<br><span class="psub">＆ご提案・打ち手</span></b><div class="muted">PDFを置き土産→打ち手DBから提案（TRACE/クロージング/伴走/TRAY）</div></div>
     </div>
     <div class="muted" style="margin-top:10px;text-align:center">最重視：候補者を“承諾者”に引き上げる<b style="color:var(--cyanD)">「気づき」</b>　／　無料で双方<b style="color:var(--cyanD)">“軽い”</b>運用（事前にAIで7〜8割、当日は数値の穴埋めだけ）</div>
   </div>
